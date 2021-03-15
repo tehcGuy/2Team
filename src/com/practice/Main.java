@@ -7,16 +7,19 @@ public class Main {
         FootballPlayer md = new FootballPlayer("MD", 42);
         BasketballPlayer yk = new BasketballPlayer("YK", 2);
 
-        Team ourTeam = new Team("UAM");
+        Team<FootballPlayer> ourTeam = new Team<>("UAM");
         ourTeam.addToTeam(md);
-        ourTeam.addToTeam(yk);
+//        ourTeam.addToTeam(yk);
 //        System.out.println(csTeam);
 
 
 //        FootballPlayer player1 = new FootballPlayer("Enemy1",1);
 //        FootballPlayer player2 = new FootballPlayer("Enemy2", 2);
 
-        Team politech = new Team("Poznańska Politechnika");
+        Team <FootballPlayer>politech = new Team<>("Poznańska Politechnika");
+        Team<FootballPlayer> ourZbyszko = new Team<>("Zbycha");
+        Team<FootballPlayer> theirJagienka = new Team<>("Jaga");
+        Team<BasketballPlayer> noName = new Team<>("nonames");
 //        politech.addToTeam(player1);
 //        politech.addToTeam(player2);
 
@@ -25,11 +28,7 @@ public class Main {
         System.out.println(ourTeam);
         System.out.println(politech);
 
-        Team ourZbyszko = new Team("Zbycha");
 
-        Team theirJagienka = new Team("Jaga");
-
-        ourZbyszko.gameResult(theirJagienka, 9, 5);
 
 
     }

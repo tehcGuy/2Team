@@ -10,9 +10,10 @@ package com.practice;
 
 import java.util.ArrayList;
 
-public class Team {
+public class Team <T extends Player>{ //upper bound
+
     private String teamName;
-    private ArrayList<Player> members;
+    private ArrayList<T> members;
     private int win, lose, draw, played, numberOfPlayers;
 
     public Team(String name) {
@@ -20,8 +21,10 @@ public class Team {
         this.members = new ArrayList<>();
     }
 
-    public void addToTeam(Player player) {
+    public void addToTeam(T player) {
         if(members.contains(player)) {
+
+            // (FootballPlayer)player) -- casting to class if I weren't specify the upper bound
             System.out.println("The player " + player.getName() + " already in team " + this.teamName);
             return;
         }
@@ -30,9 +33,8 @@ public class Team {
         this.numberOfPlayers++;
     }
 
-
-    public void gameResult(Team opponentTeam, int ourScore, int theirScore) {
-        if(opponentTeam == null || this.teamName == opponentTeam.teamName ) {
+    public void gameResult(Team<T> opponentTeam, int ourScore, int theirScore) {
+        if(opponentTeam == null || this.teamName.contains(opponentTeam.teamName) ) {
             System.out.println("Please, enter a valid opponent!");
             return;
         }
@@ -49,6 +51,8 @@ public class Team {
             this.lose++;
             opponentTeam.win++;
         }
+        //        opponentTeam.gameResult(null,theirScore,ourScore); I can possible do this, but it doesn't makes sense in this context
+
     }
 
     //    TAKE AWAY
