@@ -1,24 +1,33 @@
 package com.practice;
+//Best way to use the class (including initialization) is from the Main class not from the Team class
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class League<T extends Player> {
+@SuppressWarnings({"rawtypes", "unchecked"})
+
+public class League<T extends Team> {
     private String seasonYear; // 2020/2021
     private String leagueName; // Championship
-    private ArrayList<Team<T>> teams; // saves teams
+    private ArrayList<T> teams; // saves teams
 
-    public League(String seasonYear, String leagueName) {
-        this.seasonYear = seasonYear;
+    public League(String leagueName) {
+        this.seasonYear = "2021/2022";
         this.leagueName = leagueName;
         this.teams = new ArrayList<>();
     }
 
-    public void addTeams(Team<T> team) {
-        if(this.teams.add(team))
-            System.out.println("Added " + team.getTeamName() + " to teams in the league");
+    public void addTeamsToLeague(T team) {
+        if(this.teams.contains(team))
+            System.out.println("Could not added since " + team.getTeamName() + " is already there");
         else
-            System.out.println("Could not add " + team.getTeamName() + " to teams in the league");
+            this.teams.add(team);
+    }
+
+    public void printSortedLeagueTeams() {
+        Collections.sort(teams); // uses Comparable from the Team class, thus, able to sort
+        for(T e : teams)
+            System.out.println(e.getTeamName() + " ranking: " + e.rank());
     }
 
     public String getSeasonYear() {
@@ -29,11 +38,7 @@ public class League<T extends Player> {
         return leagueName;
     }
 
-    public ArrayList<Team<T>> getTeams() {
+    public ArrayList<T> getTeams() {
         return teams;
-    }
-    @Override
-    public String toString() {
-        return "League{" + "seasonYear='" + seasonYear + '\'' + ", leagueName='" + leagueName + '\'' + ", teams=" + teams + '}';
     }
 }

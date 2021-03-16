@@ -1,5 +1,6 @@
-package com.practice;
 /*Implementing teams and players in OOP with generics*/
+package com.practice;
+// EXEMPLARY CODE
 
 // ArrayList<Team> teams;
 // Collections.sort(teams);
@@ -22,35 +23,43 @@ public class Main {
         Team<SoccerPlayer> politech = new Team<>("Poznańska Politechnika");
         Team<SoccerPlayer> uniwerKarola = new Team<>("Med. Uniwersytet Karola");
 
-        SoccerPlayer md = new SoccerPlayer("MD", 42);
+        Team<BasketballPlayer> basketStreetWolves = new Team<>("Street Wolves");
+        Team<BasketballPlayer> basketFoxes = new Team<>("Foxes");
 
-        SoccerPlayer player1 = new SoccerPlayer("Enemy1",1);
-        SoccerPlayer player2 = new SoccerPlayer("Enemy2", 2);
         //One may add the players to team
+        SoccerPlayer md = new SoccerPlayer("MD", 42);
+        SoccerPlayer player1 = new SoccerPlayer("Enemy1", 1);
+        SoccerPlayer player2 = new SoccerPlayer("Enemy2", 2);
+
+        BasketballPlayer jordan = new BasketballPlayer("Michel Jordan", 1);
+        basketFoxes.addToTeam(jordan);
+
+        //Adding the league
+        League<Team<SoccerPlayer>> championship = new League<>("League of Champions");
+        championship.addTeamsToLeague(ourTeamUAM);
+        championship.addTeamsToLeague(politech);
+        championship.addTeamsToLeague(uniwerKarola);
 
         //game
         ourTeamUAM.gameResult(politech, 1, 0);
-        ourTeamUAM.gameResult(uniwerKarola,3,1);
+        ourTeamUAM.gameResult(uniwerKarola, 3, 1);
 
-        uniwerKarola.gameResult(politech,4,0);
-        uniwerKarola.gameResult(ourTeamUAM,12,7);
+        uniwerKarola.gameResult(politech, 4, 0);
+        uniwerKarola.gameResult(ourTeamUAM, 12, 7);
 
-        politech.gameResult(ourTeamUAM, 0,5);
-        politech.gameResult(uniwerKarola, 1,1);
+        politech.gameResult(ourTeamUAM, 0, 5);
+        politech.gameResult(uniwerKarola, 1, 1);
 
-        System.out.println("Ranking");
-        System.out.println(uniwerKarola.getTeamName() + ": " + uniwerKarola.rank());
-        System.out.println(ourTeamUAM.getTeamName() + ": " + ourTeamUAM.rank());
-        System.out.println(politech.getTeamName() + ": " + politech.rank());
+        championship.printSortedLeagueTeams(); //descending order
+        ////
 
-        ourTeamUAM.createLeague("Championship");
-        ourTeamUAM.addTeamToLeague(1, ourTeamUAM);
-        ourTeamUAM.addTeamToLeague(1, uniwerKarola);
-        ourTeamUAM.addTeamToLeague(1, politech);
+        League<Team<BasketballPlayer>> goldenNet = new League<>("Golden Net");
 
-        ourTeamUAM.printLeagueMembers(1);
+        goldenNet.addTeamsToLeague(basketFoxes);
+        goldenNet.addTeamsToLeague(basketStreetWolves);
 
+        basketFoxes.gameResult(basketStreetWolves, 3, 4);
 
-//        System.out.println(politech.compareTo(ourTeamUAM));
+        goldenNet.printSortedLeagueTeams();
     }
 }

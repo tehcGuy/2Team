@@ -18,7 +18,6 @@ package com.practice;
 import java.util.ArrayList;
 
 public class Team<T extends Player> implements Comparable<Team<T>> { //upper bound and build in comparable static function
-    private ArrayList<League<T>> leagues;
 
     private String teamName;
     private ArrayList<T> members;
@@ -28,7 +27,6 @@ public class Team<T extends Player> implements Comparable<Team<T>> { //upper bou
         this.teamName = name;
 
         this.members = new ArrayList<>();
-        this.leagues = new ArrayList<>();
     }
 
     public void addToTeam(T player) {
@@ -91,7 +89,6 @@ public class Team<T extends Player> implements Comparable<Team<T>> { //upper bou
         if(this.played == 0) {
             return "Your team " + this.teamName + " played no game";
         }
-
         System.out.println(); //indentation
         System.out.println("Team " + "teamName='" + teamName + '\'' + "\nwin=" + win + "\nlose=" + lose + "\ndraw=" + draw + "\nplayed=" + played + "\nnumberOfPlayers=" + numberOfPlayers);
         System.out.println("Players of the team: ");
@@ -99,27 +96,13 @@ public class Team<T extends Player> implements Comparable<Team<T>> { //upper bou
     }
 
     @Override
-    public int compareTo(Team<T> o) {
-        return Integer.compare(o.rank(), this.rank()); // if 1st argument is bigger then 1. If 2nd then -1. else 0
-    }
-
-    public void createLeague(String leagueName) {
-        this.leagues.add(new League<>("2021/2022", leagueName));
-    }
-
-    public void addTeamToLeague(int leagueNumber, Team<T> team) {
-        this.leagues.get(leagueNumber - 1).addTeams(team);
-    }
-
-
-    public void printLeagueMembers(int leagueNumber) {
-        leagueNumber -= 1;
-        if(leagues.get(leagueNumber) == null)
-            System.out.println("League #" + leagueNumber + " does not exist");
-        else {
-            System.out.println("Found the league. Printing the teams:");
-            System.out.println(leagues.get(leagueNumber));
-//            System.out.println(leagues.get(leagueNumber).getTeams());
+    public int compareTo(Team<T> o) { // if 1st argument is bigger then 1. If 2nd then -1. else 0
+        if(this.rank() > o.rank()) {
+            return -1;
+        } else if(this.rank() < o.rank()) {
+            return 1;
+        } else {
+            return 0;
         }
     }
 }
